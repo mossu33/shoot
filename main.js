@@ -275,7 +275,39 @@ rightBtn.addEventListener('touchstart', () =>{
 });
 
 shootBtn.addEventListener('touchstart', () => {
+
+  if(index < re.length){
+    re[index].remove();
+    index ++;
+
+  if(index === re.length){
+
+  const re0 = document.createElement('div');
+  re0.innerHTML = 'RELOAD...';
+  re0.classList.add('re0');
+  re0.style.fontSize = '24'+'px';
+  document.body.appendChild(re0);
+  // re[index].remove();
+
+timeSet = 5
+time = 5 * 1000;
+endTime = new Date().getTime() + time;
+timer.classList.add('timer');
+document.body.appendChild(timer);
+intervalId = setInterval(check, 100);
+  return;
+  }
   shootBullet();
+}
 });
 
+document.addEventListener("touchstart", function(event) {
+  if (event.touches.length > 1) {  // ✅ 2本指以上のタップを検出！
+      event.preventDefault();  // ✅ デフォルトのズーム動作を防ぐ！
+  }
+}, { passive: false });
+
+document.addEventListener("dblclick", function(event) {
+  event.preventDefault();  // ✅ ダブルクリックによる拡大を防ぐ！
+});
 }
